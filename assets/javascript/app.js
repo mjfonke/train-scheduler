@@ -41,8 +41,35 @@ $(document).ready(function(){
           $("#dst-text").val("");
           $("#time-text").val("");
           $("#freq-text").val("");
+
+        
       });
 
-      
+
+      database.ref().on("child_added", function(childSnapshot) {
+
+        var trainName = childSnapshot.val().name;
+        var destination = childSnapshot.val().destination;
+        var trainTime = childSnapshot.val().time;
+        var frequency = childSnapshot.val().frequency;
+
+        var nextTrain;
+
+        var minAway;
+
+        // needs to look at moment.js and calculate next train time and minutes away
+
+        var newRow = $("<tr>").append(
+            $("<td>").text(trainName),
+            $("<td>").text(destination),
+            $("<td>").text(frequency),
+            $("<td>").text(),
+            $("<td>").text()
+        )
+
+
+
+      });
+
 
 });
