@@ -19,13 +19,13 @@ $(document).ready(function(){
 
           var trainName = $("#name-text").val().trim();
           var destination = $("#dst-text").val().trim();
-          var trainTime = $("#time-text").val().trim();
+          var firstTrain = $("#time-text").val().trim();
           var frequency = $("#freq-text").val().trim();
 
           var trainSchedule = {
               name: trainName,
               destination: destination,
-              time: trainTime,
+              time: firstTrain,
               frequency: frequency
           };
 
@@ -50,12 +50,24 @@ $(document).ready(function(){
 
         var trainName = childSnapshot.val().name;
         var destination = childSnapshot.val().destination;
-        var trainTime = childSnapshot.val().time;
+        var firstTrain = childSnapshot.val().time;
         var frequency = childSnapshot.val().frequency;
 
-        var nextTrain;
+        var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+        
+        var currentTime = moment();
 
-        var minAway;
+        var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
+
+        var remainder = diffTime % frequency;
+
+        var minAway = frequency - remainder;
+
+        var nextTrain = moment().add(minAway, "minutes")
+
+        var nextTrainTime = moment(nextTrain).format("hh:mm a");
+
+        
 
         // needs to look at moment.js and calculate next train time and minutes away
 
@@ -63,9 +75,11 @@ $(document).ready(function(){
             $("<td>").text(trainName),
             $("<td>").text(destination),
             $("<td>").text(frequency),
-            $("<td>").text(),
-            $("<td>").text()
-        )
+            $("<td>").text(nextTrainTime),
+            $("<td>").text(minAway)
+        );
+
+        $("#train-table > tbody").append(newRow);
 
 
 
