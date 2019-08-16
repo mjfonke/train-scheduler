@@ -54,8 +54,6 @@ $(document).ready(function(){
         var frequency =childSnapshot.val().frequency;
 
         var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
-        
-        var currentTime = moment();
 
         var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
 
@@ -66,26 +64,29 @@ $(document).ready(function(){
         var nextTrain = moment().add(minAway, "minutes")
 
         var nextTrainTime = moment(nextTrain).format("hh:mm a");
-
-        // var updateBtn = $("<button>").addClass("update-btn").attr("data-index", index)
-
-        // needs to look at moment.js and calculate next train time and minutes away
-
+        
+        
         var newRow = $("<tr>").append(
             $("<td>").text(trainName),
             $("<td>").text(destination),
-            $("<td>").text(frequency),
+            $("<td>").text(frequency + " min"),
             $("<td>").text(nextTrainTime),
-            $("<td>").text(minAway)
+            $("<td>").text(minAway + " min")
         );
+       
 
         $("#train-table > tbody").append(newRow);
-
 
 
       }), function(errorObject) {
         console.log("The read failed: " + errorObject.code);
       }
 
+      setInterval(function() {
+        $("td").load();
+      
+      }, 2*1000);
 
+      
+      
 });
