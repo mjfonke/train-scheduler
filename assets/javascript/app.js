@@ -65,13 +65,15 @@ $(document).ready(function(){
 
         var nextTrainTime = moment(nextTrain).format("hh:mm a");
         
-        
+        var index = childSnapshot.index;
+
         var newRow = $("<tr>").append(
             $("<td>").text(trainName),
             $("<td>").text(destination),
             $("<td>").text(frequency + " min"),
             $("<td>").text(nextTrainTime),
-            $("<td>").text(minAway + " min")
+            $("<td>").text(minAway + " min"),
+          
         );
        
 
@@ -82,11 +84,6 @@ $(document).ready(function(){
         console.log("The read failed: " + errorObject.code);
       }
 
-      setInterval(function() {
-        $("td").load();
-      
-      }, 2*1000);
-
-      
+     
       
 });
