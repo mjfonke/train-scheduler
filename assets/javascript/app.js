@@ -51,7 +51,7 @@ $(document).ready(function(){
         var trainName = childSnapshot.val().name;
         var destination = childSnapshot.val().destination;
         var firstTrain = childSnapshot.val().time;
-        var frequency = childSnapshot.val().frequency;
+        var frequency =childSnapshot.val().frequency;
 
         var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
         
@@ -67,7 +67,7 @@ $(document).ready(function(){
 
         var nextTrainTime = moment(nextTrain).format("hh:mm a");
 
-        
+        // var updateBtn = $("<button>").addClass("update-btn").attr("data-index", index)
 
         // needs to look at moment.js and calculate next train time and minutes away
 
@@ -83,7 +83,9 @@ $(document).ready(function(){
 
 
 
-      });
+      }), function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
 
 
 });
